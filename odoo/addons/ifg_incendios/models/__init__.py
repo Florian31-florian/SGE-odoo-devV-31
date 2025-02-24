@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from . import models,EquipoContraIncendios,Informe,MantenimientoEquipo,ProveedorEquipo;
+from . import EquipoContraIncendios,Informe,MantenimientoEquipo,ProveedorEquipo
