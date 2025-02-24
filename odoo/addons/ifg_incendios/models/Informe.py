@@ -1,4 +1,4 @@
-from odoo import models,EquipoContraIncendios, fields, api
+from odoo import models, fields, api
 
 
 
