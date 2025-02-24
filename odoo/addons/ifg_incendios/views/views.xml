@@ -1,60 +1,55 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="ifg_incendios.list">
-      <field name="name">ifg_incendios list</field>
-      <field name="model">ifg_incendios.ifg_incendios</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
+    <record id="view_kanban_equipo" model="ir.ui.view">
+        <field name="name">ifg_incendios.equipo.kanban</field>
+        <field name="model">ifg_incendios.equipo</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="tipo_equipo"/>
+                <field name="fecha_ultimo_mantenimiento"/>
+                <field name="fecha_proximo_mantenimiento"/>
+                <field name="name"/>
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="ifg_incendios.action_window">
-      <field name="name">ifg_incendios window</field>
-      <field name="res_model">ifg_incendios.ifg_incendios</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_details">
+                            <div class="oe_kanban_title">
+                                <field name="name"/>
+                            </div>
+                            <div class="oe_kanban_image">
+                                <t t-if="record.tipo_equipo.raw_value == 'extintor'">
+                                </t>                
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="ifg_incendios.action_server">
-      <field name="name">ifg_incendios server</field>
-      <field name="model_id" ref="model_ifg_incendios_ifg_incendios"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+                                <t t-if="record.tipo_equipo.raw_value == 'hidrante'">
+                                </t>
+                                <t t-if="record.tipo_equipo.raw_value == 'manguera'">
+                                </t>
+                            </div>
+                            <div class="oe_kanban_content">
+                                <div>
+                                    <strong>Último Mantenimiento:</strong> <field name="fecha_ultimo_mantenimiento"/>
+                                </div>
+                                <div>
+                                    <strong>Próximo Mantenimiento:</strong> <field name="fecha_proximo_mantenimiento"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="ifg_incendios" id="ifg_incendios.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="ifg_incendios.menu_1" parent="ifg_incendios.menu_root"/>
-    <menuitem name="Menu 2" id="ifg_incendios.menu_2" parent="ifg_incendios.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="ifg_incendios.menu_1_list" parent="ifg_incendios.menu_1"
-              action="ifg_incendios.action_window"/>
-    <menuitem name="Server to list" id="ifg_incendios" parent="ifg_incendios.menu_2"
-              action="ifg_incendios.action_server"/>
--->
-  </data>
+                <group name="columns">
+                    <kanban-default/>
+                    <kanban-group field="tipo_equipo">
+                        <group name="extintores" string="Extintores"/>
+                        <group name="hidrantes" string="Hidrantes"/>
+                        <group name="mangueras" string="Mangueras"/>
+                        <group name="detectores" string="Detectores"/>
+                        <group name="pulsadores" string="Pulsadores"/>
+                        <group name="rociadores" string="Rociadores"/>
+                        <group name="sirenas" string="Sirenas"/>
+                        <group name="centrales_incendios" string="Centrales de Incendios"/>
+                    </kanban-group>
+                </group>
+            </kanban>
+        </field>
+    </record>
 </odoo>
